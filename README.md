@@ -30,3 +30,9 @@ Rough sketch :
    if match is true ===> div-color = yellow
 
 5. ELSE ===> dark gray
+
+---
+
+### _Side-implementation_
+
+1. Add favicon
