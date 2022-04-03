@@ -53,7 +53,7 @@ table.word-matrix {
 table.keyboard {
   width: 100%;
   margin: auto;
-  border-spacing: 3px;
+  border-spacing: 4px;
 }
 
 .keyboard td {
@@ -67,4 +67,9 @@ table.keyboard {
   font-size: 1.2rem;
   text-align: center;
   padding: 7px;
+}
+
+.keyboard td:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
