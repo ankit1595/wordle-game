@@ -27,7 +27,7 @@ header {
   margin: 20px;
 }
 
-table.word-matrix {
+.word-matrix {
   /* min-width: 14rem;
   min-height: 16rem; */
   height: min(55vh, 55vw);
@@ -38,7 +38,7 @@ table.word-matrix {
   margin-bottom: 25px;
 }
 
-.word-matrix td {
+.word-matrix>tr>td {
   font-size: 1.6rem;
   width: 40px;
   height: 40px;
@@ -50,13 +50,13 @@ table.word-matrix {
   text-align: center;
 }
 
-table.keyboard {
+.keyboard {
   width: 100%;
   margin: auto;
-  border-spacing: 3px;
+  border-spacing: 4px;
 }
 
-.keyboard td {
+.keyboard>tr>td {
   min-width: 20px;
   aspect-ratio: 3/2;
   color: white;
@@ -67,4 +67,9 @@ table.keyboard {
   font-size: 1.2rem;
   text-align: center;
   padding: 7px;
+}
+
+.keyboard>tr>td:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
