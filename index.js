@@ -1,11 +1,33 @@
 createWordMatrix();
 createKeyboard();
 
-// document.addEventListener("keydown",function(event){
-//     console.log(event.target);
-// }
+var wordbox=document.querySelectorAll(".word-matrix tr td");
+console.log(wordbox[0]);
+var cnt=0;
 document.addEventListener("keydown",(e)=>{
-    console.log(e.key);
+    if(e.keyCode==8){
+        cnt--;
+        wordbox[cnt].textContent="";
+        
+    }
+    if(cnt==5) return;
+    
+    if(e.keyCode==13){
+        console.log(`Enter pressed : ${cnt}`);
+    }
+    if(e.keyCode>=65 && e.keyCode<=90 ){
+        console.log(cnt);
+        wordbox[cnt++].textContent=e.key.toUpperCase();
+    }
+        // if(cnt==0 || cnt%5!==0){
+        //     console.log(cnt);
+        // }
+        // if((cnt+1)%5==0){
+        //     //console.log("true");
+                  
+        // }
+    
+    //console.log(e.key.toUpperCase());
 });
 
 function createWordMatrix(){
@@ -59,8 +81,24 @@ var thirdRow=document.querySelectorAll(".keyboard3 tr td");
 for(let i=0;i<charArr3.length;i++){
     thirdRow[i].textContent=charArr3[i];
     thirdRow[i].setAttribute("id",charArr3[i]);
+
+
 }
 }
+
+var keySelect=document.querySelectorAll(".keyboard tr");
+var k=0;
+while(k<3){
+keySelect[k++].addEventListener("click",function(e){
+    console.log(e.target.textContent);
+    wordbox[cnt++].textContent=e.target.textContent;
+})
+}
+
+
+
+
+//var tdata2=document.querySelectorAll(".keyboard2 tr");
 
 
 // const element = document
