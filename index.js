@@ -59,6 +59,7 @@ while (k < 3) {
     if (e.target.textContent === "Enter") {
       if (indexWord === 5 && e.target.textContent === "Enter") {
         console.log("enter pressed");
+        matchWord(wordMatrix[row].textContent);
         row++;
         indexWord = 0;
       }
