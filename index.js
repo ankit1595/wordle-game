@@ -1,8 +1,15 @@
 createWordMatrix();
 createKeyboard();
 
-let masterWord = "VIREN";
+let masterWord = "APRIL";
 var isMatched = false;
+let alphabetArray = new Array(26).fill(0);
+for (let masterIndex = 0; masterIndex < masterWord.length; masterIndex++) {
+  const masterL = masterWord[masterIndex];
+  const charPos = masterL.charCodeAt(0) - 65;
+  alphabetArray[charPos]++;
+}
+console.log(alphabetArray);
 
 var wordMatrix = document.querySelectorAll(".word-matrix tr");
 var row = 0;
@@ -63,24 +70,67 @@ while (k < 3) {
 }
 
 function matchWord(userWord) {
+  const alphabetCount = { ...alphabetArray };
+  let charPos;
+  let arr = [];
+  console.log("alphabet count array", alphabetCount);
+  let isMarked = Boolean;
+  //   console.log(isMarked);
+
+  for (let index = 0; index < userWord.length; index++) {
+    const userL = userWord[index];
+    const masterL = masterWord[index];
+    if (userL === masterL) {
+      //   if (alphabetCount[charPos] === 0) {
+      //     break;
+      //   }
+      isMatchedAtPos(row, index); // GREEN COLOR
+      alphabetCount[charPos]--;
+      //   console.log("alphabetCount array", alphabetCount);
+      //   console.log("matched", userL + userIndex + masterL + masterIndex);
+      //   isMarked = true;
+      //   console.log("isMarked : ", isMarked);
+
+      arr[index] = 1;
+    }
+  }
+  console.log("ismarked : ", arr);
   for (let userIndex = 0; userIndex < userWord.length; userIndex++) {
     const userL = userWord[userIndex];
+    charPos = userL.charCodeAt(0) - 65;
+    console.log(alphabetCount);
+    // console.log("isMarked", isMarked);
+
     for (let masterIndex = 0; masterIndex < masterWord.length; masterIndex++) {
       const masterL = masterWord[masterIndex];
-      //Green color logic
-      if (userL === masterL && userIndex === masterIndex) {
-        console.log("matched");
-        isMatchedAtPos(row, userIndex);
-        break;
-      }
+      console.log(
+        "color",
+        wordMatrix[row].childNodes[userIndex].style["backgroundColor"]
+      );
+
       //Yellow color logic
-      else if (userL === masterL && userIndex !== masterIndex) {
-        console.log("Yellow color");
+      if (
+        alphabetCount[charPos] &&
+        userL === masterL &&
+        userIndex !== masterIndex &&
+        !arr[userIndex]
+      ) {
+        // if (alphabetCount[charPos] === 0) {
+        //   break;
+        // }
+        // if (isMarked) {
+        //   break;
+        // }
+        // else {
+        console.log("Yellow ", userL + userIndex + masterL + masterIndex);
+        alphabetCount[charPos]--;
         isMatchedAtAnyPos(row, userIndex);
         break;
+        // }
       }
-      //Gray color logic
-      else {
+      //   Gray color logic
+      else if (!arr[userIndex]) {
+        console.log("not matched ", userL + userIndex + masterL + masterIndex);
         notMatched(row, userIndex);
       }
     }

@@ -21,7 +21,7 @@ Rough sketch :
 
 1. Database or API for 5-letter word data
 2. Take/Fetch a word from database/API
-3. Compare user word ===> master-word.... **word-by-word**
+3. Compare user word ===> master-word.... **LETTER-by-LETTER**
 
    IF match is true ===> change particular div color to green (word-matrix as well as keyboard)
 
