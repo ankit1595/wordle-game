@@ -38,7 +38,7 @@ header {
   margin-bottom: 25px;
 }
 
-.word-matrix>tr>td {
+.word-matrix > tr > td {
   font-size: 1.6rem;
   width: 40px;
   height: 40px;
@@ -56,7 +56,7 @@ header {
   border-spacing: 4px;
 }
 
-.keyboard>tr>td {
+.keyboard > tr > td {
   min-width: 20px;
   aspect-ratio: 3/2;
   color: white;
@@ -69,7 +69,7 @@ header {
   padding: 7px;
 }
 
-.keyboard>tr>td:hover {
+.keyboard > tr > td:hover {
   cursor: pointer;
   opacity: 0.8;
 }

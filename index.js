@@ -1,14 +1,14 @@
 createWordMatrix();
 createKeyboard();
 
-// var wordbox = document.querySelectorAll(".word-matrix tr td");
-var wordMatrix = document.querySelectorAll(".word-matrix tr");
-console.log(wordMatrix[0].childNodes[0]);
-let masterWord = ["Ankit"];
+let masterWord = "VIREN";
+var isMatched = false;
 
+var wordMatrix = document.querySelectorAll(".word-matrix tr");
 var row = 0;
 var indexWord = 0;
 
+//Keystrokes input logic
 document.addEventListener("keydown", (e) => {
   if (e.keyCode == 8) {
     if (indexWord == 0) return; // so that index will not go to negative
@@ -22,9 +22,12 @@ document.addEventListener("keydown", (e) => {
   ) {
     console.log(indexWord);
 
+    //When ENTER key pressed
     if (e.keyCode === 13) {
       if (indexWord === 5 && e.keyCode === 13) {
         console.log("enter pressed");
+        // console.log(wordMatrix[0].textContent);
+        matchWord(wordMatrix[row].textContent);
         row++;
         indexWord = 0;
       }
@@ -33,44 +36,58 @@ document.addEventListener("keydown", (e) => {
     }
   }
 });
-// document.addEventListener("keydown", (e) => {
-//   // FOR BACKSPACE
-//   if (e.keyCode == 8) {
-//     if (indexWord == 0) return; // so that index will not go to negative
-//     wordbox[--indexWord].textContent = "";
-//   }
 
-//   //FOR key from A to Z or ENTER key   can be used isString or isalpha
-//   if (
-//     (e.keyCode >= 65 && e.keyCode <= 90 && indexWord < 30) ||
-//     e.keyCode === 13
-//   ) {
-//     console.log(indexWord);
-//     // wordbox[indexWord++].textContent = e.key.toUpperCase();
+// UI-keyboard input logic
+var keySelect = document.querySelectorAll(".keyboard tr");
+var k = 0;
+while (k < 3) {
+  keySelect[k++].addEventListener("click", function (e) {
+    if (e.target.textContent === "Del") {
+      console.log("del pressed", e.target);
+      if (indexWord == 0) return; // so that index will not go to negative
+      wordMatrix[row].childNodes[--indexWord].textContent = "";
+      return;
+    }
+    //When ENTER key pressed
+    if (e.target.textContent === "Enter") {
+      if (indexWord === 5 && e.target.textContent === "Enter") {
+        console.log("enter pressed");
+        row++;
+        indexWord = 0;
+      }
+    } else if (indexWord < 5) {
+      wordMatrix[row].childNodes[indexWord++].textContent =
+        e.target.textContent;
+    }
+  });
+}
 
-//     if ((indexWord % 5 === 0 && indexWord !== 0) || e.keyCode === 13) {
-//       console.log("indexWord: ", indexWord);
-//       if (e.keyCode === 13) {
-//         // wordbox[indexWord].textContent = "";
-//         console.log(e);
-//         if (e.keyCode >= 65 && e.keyCode <= 90 && indexWord < 30) {
-//           wordbox[indexWord++].textContent = e.key.toUpperCase();
-//         }
-//       }
-//       return;
-//       //   if (e.keyCode === 13) {
-//       //     console.log("enter pressed ;", indexWord);
-//       //     if (e.key.toUpperCase() === "ENTER") {
-//       //       wordbox[indexWord--].textContent = "";
-//       //     }
-//       //     wordbox[indexWord++].textContent = e.key.toUpperCase();
-//       //     // return;
-//       //   }
-//     } else {
-//       wordbox[indexWord++].textContent = e.key.toUpperCase();
-//     }
-//   }
-// });
+function matchWord(userWord) {
+  console.log(`user word ${userWord}, master ${masterWord}`);
+  //   if (masterWord === userWord) {
+  //     isMatched = true;
+  //     console.log(`user word ${userWord}, master ${masterWord}`, userWord[0]);
+  //   }
+  console.log("row: ", row);
+  for (let index = 0; index < userWord.length; index++) {
+    const userL = userWord[index];
+    const masterL = masterWord[index];
+    if (userL === masterL) {
+      console.log("matched");
+      isMatchedAtPos(row, index);
+    } else {
+      userWord.indexOf(userL);
+      console.log("not matched index: ", userL);
+    }
+  }
+}
+
+function isMatchedAtPos(row, index) {
+  setTimeout(() => {
+    wordMatrix[row].childNodes[index].style.backgroundColor = "green";
+    wordMatrix[row].childNodes[index].style.borderColor = "green";
+  }, 200);
+}
 
 function createWordMatrix() {
   var tableRow;
@@ -124,60 +141,3 @@ function createKeyboard() {
     thirdRow[i].setAttribute("id", charArr3[i]);
   }
 }
-
-var keySelect = document.querySelectorAll(".keyboard tr");
-var k = 0;
-while (k < 3) {
-  keySelect[k++].addEventListener("click", function (e) {
-    if (e.target.textContent === "Del") {
-      console.log("del pressed", e.target);
-      if (indexWord == 0) return; // so that index will not go to negative
-      wordMatrix[row].childNodes[--indexWord].textContent = "";
-      return;
-    }
-    if (e.target.textContent === "Enter") {
-      if (indexWord === 5 && e.target.textContent === "Enter") {
-        console.log("enter pressed");
-        row++;
-        indexWord = 0;
-      }
-    } else if (indexWord < 5) {
-      wordMatrix[row].childNodes[indexWord++].textContent =
-        e.target.textContent;
-    }
-
-    // else {
-    //   console.log(e.target.textContent);
-    //   wordMatrix[row].childNodes[indexWord++].textContent = e.target.textContent;
-    // }
-  });
-}
-
-//var tdata2=document.querySelectorAll(".keyboard2 tr");
-
-// const element = document
-//   .querySelector(".word-matrix")
-//   .getElementsByTagName("tr");
-// // console.log(element[0].cells[0].textContent);
-// document.addEventListener("keydown", handlerKey);
-
-// function handlerKey(e) {
-//   console.log(e.key);
-
-//   console.log("element", element[0].cells);
-//   for (let i = 0; i < element.length; i++) {
-//     e.stopPropagation();
-//     for (let j = 0; j < element[i].cells.length; j++) {
-//       console.log("element", element[i].cells[j]);
-//       //   let key = e.key;
-//       //   do {
-//       //     element[i].cells[j].textContent = e.key;
-//       //   } while (key !== e.key);
-//       //   document.addEventListener("keyup", () => handlerKey());
-
-//       element[i].cells[j].textContent = e.key;
-//     }
-//   }
-//   //   const keyStroke = e.key;
-//   //   element[0].cells[0].textContent = keyStroke;
-// }
