@@ -63,29 +63,56 @@ while (k < 3) {
 }
 
 function matchWord(userWord) {
-  console.log(`user word ${userWord}, master ${masterWord}`);
-  //   if (masterWord === userWord) {
-  //     isMatched = true;
-  //     console.log(`user word ${userWord}, master ${masterWord}`, userWord[0]);
-  //   }
-  console.log("row: ", row);
-  for (let index = 0; index < userWord.length; index++) {
-    const userL = userWord[index];
-    const masterL = masterWord[index];
-    if (userL === masterL) {
-      console.log("matched");
-      isMatchedAtPos(row, index);
-    } else {
-      userWord.indexOf(userL);
-      console.log("not matched index: ", userL);
+  for (let userIndex = 0; userIndex < userWord.length; userIndex++) {
+    const userL = userWord[userIndex];
+    for (let masterIndex = 0; masterIndex < masterWord.length; masterIndex++) {
+      const masterL = masterWord[masterIndex];
+      //Green color logic
+      if (userL === masterL && userIndex === masterIndex) {
+        console.log("matched");
+        isMatchedAtPos(row, userIndex);
+        break;
+      }
+      //Yellow color logic
+      else if (userL === masterL && userIndex !== masterIndex) {
+        console.log("Yellow color");
+        isMatchedAtAnyPos(row, userIndex);
+        break;
+      }
+      //Gray color logic
+      else {
+        notMatched(row, userIndex);
+      }
     }
   }
 }
+// }
 
+//Yellow color logic: compare userLetter to whole master array elements
+// }
+
+//Green color logic
 function isMatchedAtPos(row, index) {
   setTimeout(() => {
     wordMatrix[row].childNodes[index].style.backgroundColor = "green";
     wordMatrix[row].childNodes[index].style.borderColor = "green";
+  }, 200);
+}
+
+//Yellow color logic
+function isMatchedAtAnyPos(row, index) {
+  setTimeout(() => {
+    wordMatrix[row].childNodes[index].style.backgroundColor = "yellow";
+    wordMatrix[row].childNodes[index].style.borderColor = "yellow";
+  }, 200);
+}
+
+// GREY COLOR LOGIC
+function notMatched(row, index) {
+  setTimeout(() => {
+    wordMatrix[row].childNodes[index].style.backgroundColor =
+      "var(--gray-color)";
+    wordMatrix[row].childNodes[index].style.borderColor = "var(--gray-color)";
   }, 200);
 }
 
